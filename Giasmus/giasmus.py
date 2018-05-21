@@ -1,14 +1,23 @@
+import copy as cp
 
-def check_chiasmus(four_elem):
-  if four_elem[1]==four_elem[2]:
-    if four_elem[0]==four_elem[3]:
-      return True
 
-def generate_giasmus(scheme):
-  def giasmus():
-    for i in scheme:
-      for j in scheme:
-      
+def check_giasmus(n_elem):
+    if len(n_elem) % 2:
+        head = n_elem[:int((len(n_elem)-1)/2)]
+        tail = n_elem[int((len(n_elem)+1)/2):]
+        tail.reverse()
+        return head == tail
+    else:
+        head = n_elem[:int(len(n_elem)/2)]
+        tail = n_elem[int(len(n_elem)/2):]
+        tail.reverse()
+        return head == tail
 
-def giasmus(scheme, text):
-  
+
+def generate_giasmus(scheme, center_elem=[]):
+    if not isinstance(center_elem, list):
+        center_elem = [center_elem]
+    head = scheme
+    tail = cp.copy(scheme)
+    tail.reverse()
+    return head + center_elem + tail
